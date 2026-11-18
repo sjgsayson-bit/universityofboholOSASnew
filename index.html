@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>For You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="petals" aria-hidden="true"></div>
+
+<header class="hero">
+  <h1>For My Best Friend</h1>
+  <p>A little lilac corner, made just for you</p>
+</header>
+
+<main class="choices">
+  <button class="card" data-open="album"><svg class="ico"><use href="#i-album"/></svg><h2>Our Album</h2><small>Pictures of us</small></button>
+  <button class="card" data-open="letter"><svg class="ico"><use href="#i-env"/></svg><h2>A Letter</h2><small>Open the notebook</small></button>
+  <button class="card" data-open="sunset"><svg class="ico"><use href="#i-sun"/></svg><h2>Our Sunsets</h2><small>Skies we shared</small></button>
+</main>
+
+<p class="hint" id="hint">Open all three to unlock a surprise</p>
+<button id="msgBtn" class="msg hidden"><svg class="mini"><use href="#i-env"/></svg>Leave a message</button>
+<button id="music" class="music" aria-label="Music on/off"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 18V6l11-2v12a3 3 0 1 1-2-2.8V7.3L11 8.6V18a3 3 0 1 1-2-2.8z"/></svg></button>
+
+<section class="overlay hidden" id="viewer">
+  <button class="close" data-close>✕</button>
+  <h3 id="viewerTitle"></h3>
+  <div class="book" id="book"></div>
+  <p class="count" id="count"></p>
+  <p class="swipe">Swipe or tap the sides to turn the page. Turn your phone sideways for a bigger book.</p>
+</section>
+
+
+<section class="overlay hidden" id="msgBox">
+  <button class="close" data-close>✕</button>
+  <form class="msgform" id="msgForm">
+    <h3>Leave a little message</h3>
+    <textarea id="msgText" required maxlength="1500" placeholder="Write anything you'd like to say…"></textarea>
+    <p class="err" id="msgErr" role="alert"></p>
+    <button type="submit" id="sendBtn">Send</button>
+  </form>
+</section>
+
+<section class="ending hidden" id="ending">
+  <p>Thank you for being you <svg class="mini"><use href="#i-heart"/></svg></p>
+  <div class="tulips" id="tulips"></div>
+</section>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gCover" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b48be8"/><stop offset="1" stop-color="#6b3bb5"/></linearGradient>
+    <linearGradient id="gPaper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#e7dbf8"/></linearGradient>
+    <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a52c7"/><stop offset=".55" stop-color="#e48fb8"/><stop offset="1" stop-color="#ffc58a"/></linearGradient>
+    <radialGradient id="gSun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fffbe6"/><stop offset=".6" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff9f6b"/></radialGradient>
+    <radialGradient id="gSeal" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#d9a3f5"/><stop offset="1" stop-color="#5d2a9c"/></radialGradient>
+
+    <symbol id="i-album" viewBox="0 0 64 64">
+      <rect x="9" y="8" width="46" height="50" rx="4" fill="#4a2584" opacity=".35" transform="translate(2 3)"/>
+      <rect x="9" y="6" width="46" height="50" rx="4" fill="url(#gCover)"/>
+      <rect x="9" y="6" width="7" height="50" rx="3" fill="#4a2584" opacity=".45"/>
+      <rect x="21" y="14" width="29" height="25" rx="2" fill="url(#gPaper)" stroke="#f3ebff" stroke-width="2"/>
+      <path d="M23 36l8-10 6 7 4-4 7 7z" fill="#a27ad9"/><circle cx="43" cy="21" r="3" fill="#ffd27a"/>
+      <rect x="23" y="45" width="24" height="3" rx="1.5" fill="#f3ebff" opacity=".7"/>
+    </symbol>
+    <symbol id="i-env" viewBox="0 0 64 64">
+      <rect x="6" y="14" width="52" height="38" rx="4" fill="url(#gPaper)" stroke="#bda0e8" stroke-width="1.5"/>
+      <path d="M6 18l26 20 26-20" fill="none" stroke="#bda0e8" stroke-width="1.5"/>
+      <path d="M6 50l20-17M58 50L38 33" stroke="#cdb6ee" stroke-width="1.2" fill="none"/>
+      <circle cx="32" cy="38" r="7" fill="url(#gSeal)"/>
+      <path d="M32 42.5l-3.6-3.6a2.1 2.1 0 0 1 3.6-2 2.1 2.1 0 0 1 3.6 2z" fill="#f1e2ff"/>
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 64 64">
+      <rect x="6" y="8" width="52" height="48" rx="8" fill="url(#gSky)"/>
+      <circle cx="32" cy="38" r="12" fill="url(#gSun)"/>
+      <path d="M6 40h52v10a6 6 0 0 1-6 6H12a6 6 0 0 1-6-6z" fill="#5a3a96" opacity=".85"/>
+      <path d="M16 44h32M20 49h24" stroke="#ffc58a" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>
+    </symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path fill="#8d5bd6" d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.800-8 11-8 11z"/><path fill="#fff" opacity=".35" d="M7 8.500a2.500 2.500 0 0 1 2.500-1.500c-1.500.8-2 2-2.500 3z"/></symbol>
+
+    <!-- realistic tulip -->
+    <linearGradient id="pBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a3fc4"/><stop offset="1" stop-color="#3f1a73"/></linearGradient>
+    <linearGradient id="pL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a2086"/><stop offset=".6" stop-color="#8a4fd0"/><stop offset="1" stop-color="#b98ae9"/></linearGradient>
+    <linearGradient id="pR" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#4a2086"/><stop offset=".6" stop-color="#8a4fd0"/><stop offset="1" stop-color="#b98ae9"/></linearGradient>
+    <radialGradient id="pF" cx=".45" cy=".3" r=".85"><stop offset="0" stop-color="#e6cbfb"/><stop offset=".35" stop-color="#b27ae6"/><stop offset=".75" stop-color="#7a3fc4"/><stop offset="1" stop-color="#47198a"/></radialGradient>
+    <linearGradient id="stem" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2a6035"/><stop offset=".45" stop-color="#8cc686"/><stop offset="1" stop-color="#2a6035"/></linearGradient>
+    <linearGradient id="leaf" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#235a30"/><stop offset=".6" stop-color="#4f9a55"/><stop offset="1" stop-color="#9fd49a"/></linearGradient>
+    <symbol id="tulip" viewBox="0 0 100 260">
+      <path d="M50 256C47 205 53 160 50 122" stroke="url(#stem)" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+      <path d="M50 256C14 226 6 172 26 124C46 166 55 212 50 256Z" fill="url(#leaf)"/>
+      <path d="M50 252C30 214 24 170 26 130" stroke="#d6f0d0" stroke-width="1" fill="none" opacity=".45"/>
+      <path d="M50 256C86 230 94 190 76 148C58 182 50 216 50 256Z" fill="url(#leaf)"/>
+      <path d="M50 250C62 214 68 184 76 154" stroke="#d6f0d0" stroke-width="1" fill="none" opacity=".4"/>
+      <path d="M50 118C30 114 26 62 50 22C74 62 70 114 50 118Z" fill="url(#pBack)"/>
+      <path d="M50 124C18 120 8 80 22 34C32 50 44 64 53 86Z" fill="url(#pL)"/>
+      <path d="M50 124C82 120 92 80 78 34C68 50 56 64 47 86Z" fill="url(#pR)"/>
+      <path d="M50 128C26 124 27 74 50 32C73 74 74 124 50 128Z" fill="url(#pF)"/>
+      <path d="M50 124C50 96 50 64 50 40M42 118C38 94 40 66 47 44M58 118C62 94 60 66 53 44" stroke="#4a1c86" stroke-width=".8" fill="none" opacity=".35"/>
+      <path d="M40 104C34 82 38 58 49 40C45 62 45 84 40 104Z" fill="#fff" opacity=".34"/>
+      <path d="M50 128C26 124 27 74 50 32" stroke="#e9d3ff" stroke-width="1" fill="none" opacity=".5"/>
+      <ellipse cx="50" cy="127" rx="5" ry="3.5" fill="#3d7f45"/>
+    </symbol>
+  </defs>
+</svg>
+
+<script src="script.js"></script>
+</body>
+</html>
