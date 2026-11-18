@@ -1,6 +1,6 @@
 /* ============ SETTINGS (edit these) ============ */
 /* Get a free access key at https://web3forms.com (type your email, the key arrives in your inbox) and paste it below */
-const ACCESS_KEY = 'PASTE-YOUR-KEY-HERE';
+const ACCESS_KEY = 'fbc0cdd7-aa3b-4599-8a55-154d675df747';
 const PHOTOS = {
   album:  { title: 'Our Album',   files: ['us1.jpg','us2.jpg','us3.jpg','us4.jpg','us5.jpg','us6.jpg'] },
   sunset: { title: 'Our Sunsets', files: ['sunset1.jpg','sunset2.jpg','sunset3.jpg','sunset4.jpg','sunset5.jpg','sunset6.jpg'] }
